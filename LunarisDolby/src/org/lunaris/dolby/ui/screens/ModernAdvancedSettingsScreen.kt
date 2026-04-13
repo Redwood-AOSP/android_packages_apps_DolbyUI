@@ -268,21 +268,6 @@ private fun ModernAdvancedSettingsContent(
                 }
             }
             
-            item {
-                ModernSettingsCard(
-                    title = "Volume Leveler",
-                    icon = Icons.Default.VolumeDown
-                ) {
-                    ModernSettingSwitch(
-                        title = stringResource(R.string.dolby_volume_leveler),
-                        subtitle = stringResource(R.string.dolby_volume_leveler_summary),
-                        checked = state.settings.volumeLevelerEnabled,
-                        onCheckedChange = { viewModel.setVolumeLeveler(it) },
-                        icon = Icons.Default.BarChart
-                    )
-                }
-            }
-            
             if (state.settings.currentProfile != 0) {
                 item {
                     ModernSettingsCard(

@@ -34,8 +34,6 @@ class DolbyRepository(private val context: Context) : AutoCloseable {
     val currentProfile: StateFlow<Int> = _currentProfile.asStateFlow()
 
     val stereoWideningSupported = context.resources.getBoolean(R.bool.dolby_stereo_widening_supported)
-    val volumeLevelerSupported = context.resources.getBoolean(R.bool.dolby_volume_leveler_supported)
-    
     private var isReleased = false
     
     private var cachedPresets: List<EqualizerPreset>? = null
@@ -108,11 +106,6 @@ class DolbyRepository(private val context: Context) : AutoCloseable {
             
             val bassEnabled = prefs.getBoolean(DolbyConstants.PREF_BASS, false)
             dolbyEffect.setDapParameter(DsParam.BASS_ENHANCER_ENABLE, bassEnabled, profile)
-            
-            if (volumeLevelerSupported) {
-                val volumeLeveler = prefs.getBoolean(DolbyConstants.PREF_VOLUME, false)
-                dolbyEffect.setDapParameter(DsParam.VOLUME_LEVELER_ENABLE, volumeLeveler, profile)
-            }
             
             DolbyConstants.dlog(TAG, "Successfully restored all settings for profile $profile")
         } catch (e: Exception) {
@@ -419,28 +412,6 @@ class DolbyRepository(private val context: Context) : AutoCloseable {
         } catch (e: Exception) {
             DolbyConstants.dlog(TAG, "setTrebleLevel: unexpected error - ${e.message}")
             throw e
-        }
-    }
-
-    fun getVolumeLevelerEnabled(profile: Int): Boolean {
-        if (!volumeLevelerSupported) return false
-        return try {
-            dolbyEffect.getDapParameterBool(DsParam.VOLUME_LEVELER_ENABLE, profile)
-        } catch (e: Exception) {
-            DolbyConstants.dlog(TAG, "Error getting volume leveler: ${e.message}")
-            false
-        }
-    }
-
-    fun setVolumeLevelerEnabled(profile: Int, enabled: Boolean) {
-        if (!volumeLevelerSupported || isReleased) return
-        
-        try {
-            checkEffect()
-            dolbyEffect.setDapParameter(DsParam.VOLUME_LEVELER_ENABLE, enabled, profile)
-            getProfilePrefs(profile).edit().putBoolean(DolbyConstants.PREF_VOLUME, enabled).apply()
-        } catch (e: Exception) {
-            DolbyConstants.dlog(TAG, "Error setting volume leveler: ${e.message}")
         }
     }
 

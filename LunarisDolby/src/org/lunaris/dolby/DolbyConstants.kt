@@ -27,7 +27,6 @@ object DolbyConstants {
     const val PREF_MID_LEVEL = "dolby_mid_level"
     const val PREF_TREBLE = "dolby_treble"
     const val PREF_TREBLE_LEVEL = "dolby_treble_level"
-    const val PREF_VOLUME = "dolby_volume"
     const val PREF_PRESETS_MIGRATED = "presets_migrated"
     const val PREF_BAND_MODE = "dolby_band_mode"
     

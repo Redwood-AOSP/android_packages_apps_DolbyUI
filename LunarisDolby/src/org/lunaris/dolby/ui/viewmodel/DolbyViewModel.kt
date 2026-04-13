@@ -76,7 +76,6 @@ class DolbyViewModel(application: Application) : AndroidViewModel(application) {
                     enabled = enabled,
                     currentProfile = profile,
                     bassEnhancerEnabled = repository.getBassEnhancerEnabled(profile),
-                    volumeLevelerEnabled = repository.getVolumeLevelerEnabled(profile),
                     bandMode = bandMode
                 )
                 
@@ -205,18 +204,6 @@ class DolbyViewModel(application: Application) : AndroidViewModel(application) {
             } catch (e: Exception) {
                 DolbyConstants.dlog(TAG, "Error setting treble level: ${e.message}")
                 _uiState.value = DolbyUiState.Error("Failed to set treble level")
-            }
-        }
-    }
-
-    fun setVolumeLeveler(enabled: Boolean) {
-        viewModelScope.launch {
-            try {
-                val profile = repository.getCurrentProfile()
-                repository.setVolumeLevelerEnabled(profile, enabled)
-                loadSettings()
-            } catch (e: Exception) {
-                DolbyConstants.dlog(TAG, "Error setting volume leveler: ${e.message}")
             }
         }
     }

@@ -10,10 +10,12 @@
         <item>@string/dolby_profile_dynamic</item>
         <item>@string/dolby_profile_video</item>
         <item>@string/dolby_profile_music</item>
-        <item>@string/dolby_profile_game</item>
-        <item>@string/dolby_profile_work</item>
-        <item>@string/dolby_profile_casual</item>
-        <item>@string/dolby_profile_mood</item>
+        <item>@string/dolby_profile_custom</item>
+        <item>@string/dolby_profile_mobility_default</item>
+        <item>@string/dolby_profile_mobility_on_the_go</item>
+        <item>@string/dolby_profile_mobility_commute</item>
+        <item>@string/dolby_profile_mobility_travel</item>
+        <item>@string/dolby_profile_voice</item>
     </string-array>
 
     <string-array name="dolby_profile_values">
@@ -24,6 +26,8 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
 
     <string-array name="dolby_preset_entries" translatable="false">
